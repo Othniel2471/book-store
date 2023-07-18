@@ -1,9 +1,9 @@
 import React from 'react';
-import BookList from '../components/BookList';
+import BookLogic from '../components/BookLogic';
 
 const Home = () => (
   <div>
-    <BookList />
+    <BookLogic />
   </div>
 );
 
