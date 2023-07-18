@@ -59,6 +59,6 @@ nav .nav-links li a:hover {
   border-radius: 50%;
 }
 
-profile:hover {
+.profile:hover {
   border: 1px solid #0290ff;
 }
