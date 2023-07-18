@@ -9,9 +9,10 @@ const categoriesSlice = createSlice({
   reducers: {
     stateCheck: (state) => {
       if (state.state === 'Under Construction') {
-        return 'Under Construction';
+        state.state = 'Under Construction';
+      } else {
+        state.state = 'Under Construction';
       }
-      return 'Ready';
     },
   },
 });
