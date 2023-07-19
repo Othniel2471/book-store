@@ -1,18 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector as UseSelector } from 'react-redux';
-import { addBook, removeBook } from '../redux/books/booksSlice';
+import {
+  getBooks,
+  addBookToApi,
+  removeBookFromApi,
+} from '../redux/books/booksSlice';
 import AddBook from './AddBook';
 import BookList from './BookList';
 
 const BookLogic = () => {
-  const { bookList } = UseSelector((state) => state.books);
+  const { bookList, loading, error } = UseSelector((state) => state.books);
 
   const dispatch = useDispatch();
 
   const addBookItem = (title, author) => {
     dispatch(
-      addBook({
+      addBookToApi({
         item_id: uuidv4(),
         title,
         author,
@@ -22,12 +26,36 @@ const BookLogic = () => {
   };
 
   const deleteBook = (id) => {
-    dispatch(removeBook(id));
+    dispatch(removeBookFromApi(id));
   };
+
+  useEffect(() => {
+    dispatch(getBooks());
+  }, [dispatch]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  let books = [];
+
+  if (typeof bookList === 'object') {
+    books = Object.keys(bookList).map((key) => {
+      const book = bookList[key][0];
+      return {
+        item_id: key,
+        ...book,
+      };
+    });
+  }
 
   return (
     <div>
-      <BookList books={bookList} deleteBook={deleteBook} />
+      <BookList books={books} deleteBook={deleteBook} />
       <AddBook addBookItem={addBookItem} />
     </div>
   );
