@@ -8,19 +8,20 @@ import {
 } from '../redux/books/booksSlice';
 import AddBook from './AddBook';
 import BookList from './BookList';
+import '../styles/loader.css';
 
 const BookLogic = () => {
   const { bookList, loading, error } = UseSelector((state) => state.books);
 
   const dispatch = useDispatch();
 
-  const addBookItem = (title, author) => {
+  const addBookItem = (title, author, category) => {
     dispatch(
       addBookToApi({
         item_id: uuidv4(),
         title,
         author,
-        category: 'Fiction',
+        category,
       }),
     );
   };
@@ -34,7 +35,7 @@ const BookLogic = () => {
   }, [dispatch]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="lds-hourglass" />;
   }
 
   if (error) {

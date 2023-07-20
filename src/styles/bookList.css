@@ -1,0 +1,15 @@
+.booklist {
+  margin-left: 5%;
+  width: 86%;
+}
+
+.booklist ul {
+  list-style: none;
+}
+
+hr {
+  width: 90%;
+  margin-left: 8%;
+  margin-top: 2rem;
+  border: 1px solid #efebeb;
+}
