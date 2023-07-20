@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import BookItem from './BookItem';
+import '../styles/bookList.css';
 
 const BookList = ({ books, deleteBook }) => (
-  <div>
-    <h2>Book List</h2>
+  <div className="booklist">
     <ul>
       {books.map((book) => (
         <BookItem book={book} key={book.item_id} deleteBook={deleteBook} />
       ))}
     </ul>
+    <hr />
   </div>
 );
 
